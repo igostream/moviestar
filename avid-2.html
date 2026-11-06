@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<title>MEDIA COLECTIONS</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #000;
+  --surface: #141414;
+  --surface-2: #1e1e1e;
+  --line: #2a2a2a;
+  --text: #f2f2f2;
+  --muted: #9a9a9a;
+  --accent: #e50914;
+  --select: #4c8dff;
+  --radius: 16px;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100%;
+}
+
+body {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.topbar, .watch-bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+}
+
+.logo-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--text);
+  color: var(--bg);
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 22px;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.gallery {
+  max-width: 720px;
+  margin: auto;
+  padding: 22px 16px 40px;
+}
+
+.gallery h1 {
+  font-size: 22px;
+  margin: 0 4px 16px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (min-width: 700px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 6px 6px 10px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 2px solid var(--line);
+  text-align: center;
+}
+
+.card:hover, .card.active {
+  border-color: var(--select);
+}
+
+.thumb {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+
+.thumb img, .thumb video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumb .auto-thumb {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.ph {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(160deg, #262626, #0d0d0d);
+}
+
+.ph svg {
+  width: 42px;
+  height: 42px;
+  fill: #555;
+}
+
+.card-label {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.telegram-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin: 0 0 20px;
+  padding: 14px;
+  border-radius: 12px;
+  background: #229ED9;
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 800;
+  transition: .2s;
+}
+
+.telegram-btn:hover {
+  background: #168ac0;
+}
+
+.telegram-btn svg {
+  width: 21px;
+  height: 21px;
+  fill: currentColor;
+}
+
+.watch-bar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 20px;
+}
+
+.watch-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 19px;
+}
+
+.yt-icon {
+  width: 34px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--accent);
+  display: grid;
+  place-items: center;
+}
+
+.yt-icon svg {
+  width: 12px;
+  height: 12px;
+  fill: white;
+}
+
+.search {
+  justify-self: center;
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.search svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--muted);
+  flex: none;
+}
+
+.search input {
+  flex: 1;
+  min-width: 0;
+  background: none;
+  border: 0;
+  outline: 0;
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+}
+
+.back-btn {
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .watch-bar {
+    grid-template-columns: auto 1fr;
+  }
+
+  .search {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    max-width: none;
+  }
+
+  .back-btn span {
+    display: none;
+  }
+}
+
+.watch {
+  max-width: 780px;
+  margin: auto;
+  padding: 16px 16px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.player-card {
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  width: 100%;
+  max-width: min(440px, calc(80svh * 9 / 16));
+  margin: auto;
+}
+
+.player {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  width: 100%;
+  background: #000;
+}
+
+.player video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+}
+
+.player-preview {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+  pointer-events: none;
+}
+
+.player::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,.1));
+}
+
+.player:has(.main-video)::after {
+  display: none;
+}
+
+.play-btn, .badge {
+  z-index: 2;
+}
+
+.play-btn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 72px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--accent);
+  display: grid;
+  place-items: center;
+}
+
+.play-btn svg {
+  width: 22px;
+  height: 22px;
+  fill: white;
+  margin-left: 3px;
+}
+
+.badge {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #000c;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex: none;
+  background: var(--accent);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+}
+
+.meta h2 {
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+.meta p {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 3px;
+}
+</style>
+</head>
+
+<body>
+
+<section id="page-gallery">
+  <header class="topbar">
+    <div class="logo-box">V</div>
+    <div class="brand" id="brand1">MY COLLECTIONS</div>
+  </header>
+
+  <main class="gallery">
+    <h1>Galery Collections</h1>
+
+    <a class="telegram-btn"
+       href="https://t.me/AsupanVideyXyz"
+       target="_blank"
+       rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24">
+        <path d="M21.8 4.2 18.5 20c-.25 1.1-.9 1.35-1.8.85l-5-3.7-2.4 2.3c-.25.25-.5.45-1 .45l.35-5.1 9.3-8.4c.4-.35-.1-.55-.6-.2L6 13.5 1.1 12c-1.05-.3-1.05-1 .2-1.5L20.4 3c.9-.35 1.7.2 1.4 1.2z"/>
+      </svg>
+      JOIN CHANNEL TELEGRAM
+    </a>
+
+    <div class="grid" id="grid"></div>
+  </main>
+</section>
+
+<section id="page-watch" class="hidden">
+  <header class="watch-bar">
+    <div class="watch-brand">
+      <div class="yt-icon">
+        <svg viewBox="0 0 10 10">
+          <path d="M2 1l7 4-7 4z"/>
+        </svg>
+      </div>
+      <span id="brand2">MY COLLECTIONS</span>
+    </div>
+
+    <label class="search">
+      <svg viewBox="0 0 24 24">
+        <path d="M10 2a8 8 0 016.3 12.9l5.4 5.4-1.4 1.4-5.4-5.4A8 8 0 1110 2zm0 2a6 6 0 100 12 6 6 0 000-12z"/>
+      </svg>
+      <input type="search" id="search" placeholder="Cari video...">
+    </label>
+
+    <button class="back-btn" id="backBtn">
+      <span>Kembali</span>
+    </button>
+  </header>
+
+  <main class="watch">
+    <article class="player-card">
+      <div class="player" id="player">
+        <button class="play-btn" id="playBtn" aria-label="Putar video">
+          <svg viewBox="0 0 10 10">
+            <path d="M2 1l7 4-7 4z"/>
+          </svg>
+        </button>
+        <span class="badge">PLAYLIST</span>
+      </div>
+
+      <div class="meta">
+        <div class="avatar" id="avatar">P</div>
+        <div>
+          <h2 id="videoTitle">Judul video</h2>
+          <p id="videoInfo"></p>
+        </div>
+      </div>
+    </article>
+  </main>
+</section>
+
+<script>
+"use strict";
+
+const SITE_NAME = "MY COLLECTIONS";
+const PLAYLIST_NAME = "Playlist Pilihan";
+
+/* DIRECT LINK BARU */
+const DIRECT_LINK = "https://uplcm.com/4/12201720";
+
+/* POPUNDER BARU */
+const POPUNDER_SRC = "https://al5sm.com/tag.min.js";
+const POPUNDER_ZONE = "12201718";
+
+/* DAFTAR VIDEO */
+const VIDEOS = [
+  {title:"Video Viral 1",thumb:"",src:"VIDO"},
+  {title:"Video Viral 2",thumb:"",src:""},
+  {title:"Video Viral 3",thumb:"",src:""},
+  {title:"Video Viral 4",thumb:"",src:""},
+  {title:"Video Viral 5",thumb:"",src:""},
+  {title:"Video Viral 6",thumb:"",src:""},
+  {title:"Video Viral 7",thumb:"",src:""},
+  {title:"Video Viral 8",thumb:"",src:""},
+  {title:"Video Viral 9",thumb:"",src:""},
+  {title:"Video Viral 10",thumb:"",src:""}
+];
+
+const THUMB_SECOND = 1;
+const $ = id => document.getElementById(id);
+const PLAY_ICON = '<svg viewBox="0 0 10 10"><path d="M2 1l7 4-7 4z"/></svg>';
+
+let current = 0;
+let popunderLoaded = false;
+let lastRenderedHash = null;
+
+$("brand1").textContent = SITE_NAME;
+$("brand2").textContent = SITE_NAME;
+document.title = SITE_NAME;
+
+/* THUMBNAIL GALERI */
+function thumbHTML(video) {
+  if (video.thumb) {
+    return `<img src="${video.thumb}" alt="" loading="lazy">`;
+  }
+
+  return `
+    <div class="ph">${PLAY_ICON}</div>
+    <video class="auto-thumb"
+      src="${video.src}#t=${THUMB_SECOND}"
+      preload="metadata"
+      muted
+      playsinline
+      tabindex="-1"
+      aria-hidden="true"
+      onerror="this.remove()"></video>
+  `;
+}
+
+/* TAMPILKAN GALERI */
+function renderGrid() {
+  $("grid").innerHTML = VIDEOS.map((video, index) => `
+    <button class="card ${index === current ? "active" : ""}" data-i="${index}">
+      <div class="thumb">${thumbHTML(video)}</div>
+      <span class="card-label">${video.title}</span>
+    </button>
+  `).join("");
+}
+
+/* DIRECT LINK SAAT KLIK VIDEO */
+$("grid").addEventListener("click", event => {
+  const card = event.target.closest(".card");
+  if (!card) return;
+
+  const index = Number(card.dataset.i);
+  if (!Number.isInteger(index) || !VIDEOS[index]) return;
+
+  window.open(DIRECT_LINK, "_blank");
+
+  location.hash = "video=" + index;
+});
+
+/* MUAT SCRIPT POPUNDER */
+function loadPageAds() {
+  if (popunderLoaded) return;
+
+  popunderLoaded = true;
+
+  const script = document.createElement("script");
+  script.dataset.zone = POPUNDER_ZONE;
+  script.src = POPUNDER_SRC;
+  script.async = true;
+
+  script.onerror = () => {
+    popunderLoaded = false;
+  };
+
+  document.body.appendChild(script);
+}
+
+/* TAMPILKAN HALAMAN VIDEO */
+function renderWatch(index) {
+  current = index;
+  const video = VIDEOS[index];
+
+  $("player").querySelectorAll(".main-video,.player-preview")
+    .forEach(element => element.remove());
+
+  $("playBtn").classList.remove("hidden");
+
+  let preview;
+
+  if (video.thumb) {
+    preview = document.createElement("img");
+    preview.src = video.thumb;
+    preview.alt = "";
+  } else {
+    preview = document.createElement("video");
+    preview.src = video.src + "#t=" + THUMB_SECOND;
+    preview.preload = "metadata";
+    preview.muted = true;
+    preview.playsInline = true;
+    preview.tabIndex = -1;
+    preview.setAttribute("aria-hidden", "true");
+    preview.onerror = () => preview.remove();
+  }
+
+  preview.className = "player-preview";
+  $("player").prepend(preview);
+
+  $("videoTitle").textContent =
+    `${PLAYLIST_NAME} — ${video.title}`;
+
+  $("videoInfo").textContent =
+    `${VIDEOS.length} video dalam playlist, pilihan #${index + 1}`;
+
+  $("avatar").textContent =
+    PLAYLIST_NAME.charAt(0).toUpperCase();
+}
+
+/* PUTAR VIDEO */
+$("playBtn").addEventListener("click", () => {
+  const video = VIDEOS[current];
+
+  $("player").querySelectorAll(".player-preview")
+    .forEach(element => element.remove());
+
+  const playerVideo = document.createElement("video");
+  playerVideo.className = "main-video";
+  playerVideo.src = video.src;
+  playerVideo.controls = true;
+  playerVideo.autoplay = true;
+  playerVideo.playsInline = true;
+  playerVideo.preload = "metadata";
+
+  if (video.thumb) {
+    playerVideo.poster = video.thumb;
+  }
+
+  playerVideo.addEventListener("ended", () => {
+    location.hash = "video=" + ((current + 1) % VIDEOS.length);
+  });
+
+  $("player").prepend(playerVideo);
+  $("playBtn").classList.add("hidden");
+
+  const playPromise = playerVideo.play();
+
+  if (playPromise && typeof playPromise.catch === "function") {
+    playPromise.catch(() => {
+      playerVideo.controls = true;
+    });
+  }
+});
+
+/* PENCARIAN VIDEO */
+$("search").addEventListener("keydown", event => {
+  if (event.key !== "Enter") return;
+
+  const query = event.target.value.trim().toLowerCase();
+  if (!query) return;
+
+  const index = VIDEOS.findIndex(video =>
+    video.title.toLowerCase().includes(query)
+  );
+
+  if (index >= 0) {
+    location.hash = "video=" + index;
+  } else {
+    event.target.value = "";
+    event.target.placeholder = "Video tidak ditemukan";
+  }
+});
+
+/* KEMBALI KE GALERI */
+$("backBtn").addEventListener("click", () => {
+  location.hash = "";
+});
+
+/* HENTIKAN PEMUTARAN */
+function stopCurrentVideo() {
+  const playerVideo = $("player").querySelector(".main-video");
+
+  if (playerVideo) {
+    playerVideo.pause();
+    playerVideo.removeAttribute("src");
+    playerVideo.load();
+    playerVideo.remove();
+  }
+
+  $("player").querySelectorAll(".player-preview")
+    .forEach(element => element.remove());
+
+  $("playBtn").classList.remove("hidden");
+}
+
+/* NAVIGASI HALAMAN */
+function route() {
+  const hash = location.hash;
+  const match = hash.match(/^#video=(\d+)$/);
+  const index = match ? Number(match[1]) : -1;
+
+  if (index >= 0 && index < VIDEOS.length) {
+    const changedVideo = lastRenderedHash !== hash;
+
+    $("page-gallery").classList.add("hidden");
+    $("page-watch").classList.remove("hidden");
+    $("search").value = "";
+
+    if (changedVideo) {
+      stopCurrentVideo();
+      renderWatch(index);
+    }
+
+    loadPageAds();
+    lastRenderedHash = hash;
+  } else {
+    stopCurrentVideo();
+
+    $("page-watch").classList.add("hidden");
+    $("page-gallery").classList.remove("hidden");
+
+    renderGrid();
+    lastRenderedHash = "";
+  }
+
+  window.scrollTo(0, 0);
+}
+
+window.addEventListener("hashchange", route);
+route();
+</script>
+
+</body>
+</html>
