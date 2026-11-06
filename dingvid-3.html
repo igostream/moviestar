@@ -49,27 +49,16 @@ body{
     padding:10px;
 }
 
-/* TELEGRAM */
-.telegram-btn{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    width:100%;
-    margin:10px 0 22px;
-    padding:14px;
-    border-radius:12px;
-    background:#229ED9;
+.telegram{
+    display:block;
+    background:#0088cc;
     color:#fff;
+    text-align:center;
     text-decoration:none;
-    font-size:15px;
+    padding:12px;
+    border-radius:10px;
     font-weight:bold;
-}
-
-.telegram-btn svg{
-    width:21px;
-    height:21px;
-    fill:currentColor;
+    margin-bottom:18px;
 }
 
 .card{
@@ -99,87 +88,79 @@ video{
 
 <body>
 
+<!-- POPUNDER -->
+<script>(function(s){s.dataset.zone='12201715',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    
 <div class="header">
-    <div class="logo">viideyhub</div>
-    <div class="upload">Upload</div>
+<div class="logo">viideyhub</div>
+<div class="upload">Upload</div>
 </div>
 
 <div class="container">
 
-<a class="telegram-btn"
-   href="https://t.me/mediaviralweb"
-   target="_blank"
-   rel="noopener noreferrer">
-    <svg viewBox="0 0 24 24">
-        <path d="M21.8 4.2 18.5 20c-.25 1.1-.9 1.35-1.8.85l-5-3.7-2.4 2.3c-.25.25-.5.45-1 .45l.35-5.1 9.3-8.4c.4-.35-.1-.55-.6-.2L6 13.5 1.1 12c-1.05-.3-1.05-1 .2-1.5L20.4 3c.9-.35 1.7.2 1.4 1.2z"/>
-    </svg>
-    JOIN CHANNEL TELEGRAM
+<a class="telegram" href="https://t.me/mediaviralweb" target="_blank" rel="noopener noreferrer">
+✈ JOIN CHANNEL TELEGRAM
 </a>
 
 <div class="card">
-    <video controls playsinline preload="metadata"
-    src="https://cdn2.videy.co/mAuiBCqS1.mp4"></video>
-    <div class="title">🔥 Video Viral #1</div>
-    <div class="meta">Trending sekarang</div>
+<video controls playsinline preload="metadata"
+src="https://cdn2.slicedrive.com/rb5G5pEu1.mp4"></video>
+<div class="title">🔥 Video Viral #1</div>
+<div class="meta">Trending sekarang</div>
 </div>
 
 <div class="card">
-    <video controls playsinline preload="metadata"
-    src="https://cdn2.videy.co/0j0rNDsI1.mp4"></video>
-    <div class="title">🔥 Video Viral #2</div>
-    <div class="meta">Trending sekarang</div>
+<video controls playsinline preload="metadata"
+src="https://cdn2.slicedrive.com/Tr4uhAM11.mp4"></video>
+<div class="title">🔥 Video Viral #2</div>
+<div class="meta">Trending sekarang</div>
 </div>
 
 <div class="card">
-    <video controls playsinline preload="metadata"
-    src="https://cdn2.videy.co/PyBXTjkI1.mp4"></video>
-    <div class="title">🔥 Video Viral #3</div>
-    <div class="meta">Trending sekarang</div>
+<video controls playsinline preload="metadata"
+src="https://cdn2.videy.co/4G73Vzhp1.mp4"></video>
+<div class="title">🔥 Video Viral #3</div>
+<div class="meta">Trending sekarang</div>
 </div>
 
 <div class="card">
-    <video controls playsinline preload="metadata"
-    src="https://cdn2.slicedrive.com/Wn9AWU0a1.mp4"></video>
-    <div class="title">🔥 Video Viral #4</div>
-    <div class="meta">Trending sekarang</div>
+<video controls playsinline preload="metadata"
+src="https://cdn2.videy.co/RJAfCYNA1.mp4"></video>
+<div class="title">🔥 Video Viral #4</div>
+<div class="meta">Trending sekarang</div>
 </div>
 
 <div class="card">
-    <video controls playsinline preload="metadata"
-    src="https://cdn2.slicedrive.com/xP8zZHI01.mp4"></video>
-    <div class="title">🔥 Video Viral #5</div>
-    <div class="meta">Trending sekarang</div>
+<video controls playsinline preload="metadata"
+src="https://cdn2.videy.co/zf12l9X41.mp4"></video>
+<div class="title">🔥 Video Viral #5</div>
+<div class="meta">Trending sekarang</div>
 </div>
 
 </div>
 
 <script>
-"use strict";
-
-const DIRECT_LINK = "https://uplcm.com/4/12201714";
-
 let smartlinkOpened = false;
 
-/* DIRECT LINK SAAT KLIK VIDEO */
-document.querySelectorAll("video").forEach(video => {
-    video.addEventListener("click", () => {
-        if (!smartlinkOpened) {
-            smartlinkOpened = true;
-            window.open(DIRECT_LINK, "_blank");
-        }
-    });
+document.querySelectorAll('video').forEach(video => {
+
+video.addEventListener('play', () => {
+
+if(!smartlinkOpened){
+smartlinkOpened = true;
+
+setTimeout(() => {
+window.open(
+'https://uplcm.com/4/12201714',
+'_blank'
+);
+},1000);
+
+}
+
 });
 
-/* POPUNDER */
-(function(s){
-    s.dataset.zone = '12201715';
-    s.src = 'https://al5sm.com/tag.min.js';
-})(
-    [document.documentElement, document.body]
-    .filter(Boolean)
-    .pop()
-    .appendChild(document.createElement('script'))
-);
+});
 </script>
 
 </body>
