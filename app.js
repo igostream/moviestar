@@ -5,17 +5,31 @@ function render(items){
  if(!items.length){root.innerHTML='<div class="loading">Belum ada video.</div>';return;}
  root.innerHTML=items.map((v,i)=>`<section class="reel" data-index="${i}">
  ${v.thumbnail?`<img class="poster" src="${esc(v.thumbnail)}" alt="">`:""}
- ${v.video?`<video src="${esc(v.video)}" ${v.thumbnail?`poster="${esc(v.thumbnail)}"`:""} playsinline loop preload="metadata"></video>`:""}
+ ${v.video?`<video src="${esc(v.video)}" ${v.thumbnail?`poster="${esc(v.thumbnail)}"`:""} playsinline loop muted preload="none"></video>`:""}
  <div class="shade"></div><button class="sound-toggle">⌁</button><button class="play-overlay">▶</button>
  <div class="reel-content"><div class="account"><div class="avatar">${v.avatar?`<img src="${esc(v.avatar)}" alt="">`:esc((v.creator||"K").charAt(0))}</div><span class="account-name">${esc(v.creator)}</span><button class="follow">Follow</button></div><div class="caption">${esc(v.caption)}</div><div class="audio-label">♫ Audio asli · ${esc(v.creator)}</div></div>
  <div class="side-actions"><button class="like"><span class="symbol">♡</span><small>${esc(v.likes)}</small></button><button class="comment"><span class="symbol">▢</span><small>${esc(v.comments)}</small></button><button class="share"><span class="symbol">➦</span><small>Bagikan</small></button><button class="more"><span class="symbol">•••</span><small>Lainnya</small></button></div><div class="progress"><span></span></div></section>`).join("");
  sections=[...root.querySelectorAll(".reel")];setup();
 }
 function startPlayback(video,section){
- // Buka directlink pada tab baru sebagai respons langsung dari klik pengguna.
- window.open(DIRECTLINK,"_blank","noopener,noreferrer");
- video.play().catch(()=>section.classList.add("paused"));
+ // Buka tab directlink secara sinkron dari klik Play agar tidak dianggap popup otomatis.
+ const adTab=window.open("about:blank","_blank");
+ if(!adTab){
+  showNotice("Directlink diblokir browser. Izinkan pop-up untuk situs ini, lalu tekan Play lagi.");
+  return;
+ }
+ try{adTab.location.href=DIRECTLINK;}catch(e){adTab.close();showNotice("Directlink tidak dapat dibuka. Coba izinkan pop-up browser.");return;}
+ // Video hanya mulai setelah tombol Play ditekan oleh pengguna.
+ video.muted=true;
+ video.play().catch(()=>{section.classList.add("paused");showNotice("Video tidak bisa diputar. Tekan Play lagi.");});
 }
+function showNotice(message){
+ let notice=document.getElementById("reelNotice");
+ if(!notice){notice=document.createElement("div");notice.id="reelNotice";notice.style.cssText="position:fixed;z-index:99;top:64px;left:12px;right:12px;padding:12px 14px;background:#222;color:#fff;border:1px solid #666;border-radius:9px;text-align:center;font-size:13px;";document.body.appendChild(notice);}
+ notice.textContent=message;
+ clearTimeout(notice._timer);notice._timer=setTimeout(()=>notice.remove(),5000);
+}
+
 function setup(){
  const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
   const s=entry.target,v=s.querySelector("video");
@@ -24,10 +38,10 @@ function setup(){
  }),{threshold:[.2,.65,.9]});
  sections.forEach(s=>{
   observer.observe(s);const v=s.querySelector("video");
-  if(v){v.muted=true;v.pause();s.classList.add("paused");v.addEventListener("play",()=>s.classList.remove("paused"));v.addEventListener("pause",()=>s.classList.add("paused"));v.addEventListener("timeupdate",()=>{if(v.duration)s.querySelector(".progress span").style.width=(v.currentTime/v.duration*100)+"%";});s.addEventListener("click",e=>{if(e.target.closest("button"))return;if(v.paused)startPlayback(v,s);else v.pause();});}
+  if(v){v.autoplay=false;v.removeAttribute("autoplay");v.muted=true;v.pause();s.classList.add("paused");v.addEventListener("loadedmetadata",()=>v.pause());v.addEventListener("play",()=>s.classList.remove("paused"));v.addEventListener("pause",()=>s.classList.add("paused"));v.addEventListener("timeupdate",()=>{if(v.duration)s.querySelector(".progress span").style.width=(v.currentTime/v.duration*100)+"%";});}
   else{s.classList.add("paused");s.querySelector(".play-overlay").style.display="none";}
-  s.querySelector(".play-overlay").onclick=()=>v&&startPlayback(v,s);
-  s.querySelector(".sound-toggle").onclick=()=>{if(v){v.muted=!v.muted;s.querySelector(".sound-toggle").textContent=v.muted?"⌁":"♪";}};
+  s.querySelector(".play-overlay").onclick=e=>{e.stopPropagation();if(v){sections.forEach(other=>{const ov=other.querySelector("video");if(ov&&ov!==v)ov.pause();});startPlayback(v,s);}};
+  s.querySelector(".sound-toggle").onclick=()=>{if(v){if(v.paused){showNotice("Tekan Play untuk memulai video.");return;}v.muted=!v.muted;s.querySelector(".sound-toggle").textContent=v.muted?"⌁":"♪";}};
   s.querySelector(".like").onclick=e=>{const x=e.currentTarget.querySelector(".symbol");x.textContent=x.textContent==="♡"?"♥":"♡";};
   s.querySelector(".follow").onclick=e=>e.currentTarget.textContent=e.currentTarget.textContent==="Follow"?"Following":"Follow";
   s.querySelector(".share").onclick=()=>{const url=location.href.split("#")[0]+"#reel-"+s.dataset.index;if(navigator.share)navigator.share({title:"Reels video",url}).catch(()=>{});else if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>alert("Link disalin"));else prompt("Salin link:",url);};
