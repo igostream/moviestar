@@ -1,102 +1,123 @@
 const PER_PAGE = 12;
-let videos = [];
-let page = 1;
-let category = "Semua";
-let query = "";
+let allVideos = [];
+let currentPage = 1;
+let currentCategory = "Semua";
+let searchTerm = "";
 
 const grid = document.getElementById("videoGrid");
-const pager = document.getElementById("pagination");
+const pagination = document.getElementById("pagination");
+const resultCount = document.getElementById("resultCount");
 
-async function loadVideos(){
-  try{
-    const response = await fetch("videos.json");
-    if(!response.ok) throw new Error("Gagal membaca videos.json");
-    videos = await response.json();
+async function loadVideos() {
+  try {
+    const response = await fetch("./videos.json?v=3", { cache: "no-store" });
+    if (!response.ok) throw new Error("HTTP " + response.status);
+    allVideos = await response.json();
     renderVideos();
-  }catch(error){
-    grid.innerHTML = '<p class="empty">Daftar video gagal dimuat. Periksa file videos.json.</p>';
-    console.error(error);
+  } catch (error) {
+    grid.innerHTML = '<p class="empty">Daftar video belum dapat dimuat. Pastikan videos.json berada satu folder dengan index.html.</p>';
+    resultCount.textContent = "Gagal memuat";
+    console.error("VIDHUB:", error);
   }
 }
 
-function filteredVideos(){
-  return videos.filter(v => {
-    const categoryOK = category === "Semua" || v.category === category;
-    const queryOK = (v.title || "").toLowerCase().includes(query);
-    return categoryOK && queryOK;
+function getFilteredVideos() {
+  return allVideos.filter(video => {
+    const categoryMatch = currentCategory === "Semua" || video.category === currentCategory;
+    const textMatch = (video.title || "").toLowerCase().includes(searchTerm);
+    return categoryMatch && textMatch;
   });
 }
 
-function renderVideos(){
-  const result = filteredVideos();
-  const total = Math.ceil(result.length / PER_PAGE);
-  if(total && page > total) page = total;
-  const visible = result.slice((page-1)*PER_PAGE, page*PER_PAGE);
+function renderVideos() {
+  const filtered = getFilteredVideos();
+  const totalPages = Math.ceil(filtered.length / PER_PAGE);
+  if (totalPages && currentPage > totalPages) currentPage = totalPages;
+  const start = (currentPage - 1) * PER_PAGE;
+  const pageVideos = filtered.slice(start, start + PER_PAGE);
+
+  resultCount.textContent = filtered.length + " VIDEO";
   grid.replaceChildren();
 
-  if(!visible.length){
+  if (!pageVideos.length) {
     const empty = document.createElement("p");
     empty.className = "empty";
-    empty.textContent = "Video tidak ditemukan.";
+    empty.textContent = "Video tidak ditemukan. Coba kata kunci lain.";
     grid.appendChild(empty);
   }
 
-  visible.forEach(video => {
+  pageVideos.forEach(video => {
     const card = document.createElement("article");
     card.className = "video-card";
     const thumb = document.createElement("div");
     thumb.className = "thumb";
 
-    if(video.thumbnail){
+    if (video.thumbnail) {
       const img = document.createElement("img");
       img.src = video.thumbnail;
       img.alt = "";
       img.loading = "lazy";
+      img.onerror = () => img.remove();
       thumb.appendChild(img);
     }
 
+    const mark = document.createElement("span");
+    mark.className = "thumb-mark";
+    mark.textContent = "VIDHUB";
     const play = document.createElement("span");
-    play.className = "play-icon";
+    play.className = "play-circle";
     play.textContent = "▶";
-    thumb.appendChild(play);
+    thumb.append(mark, play);
 
     const info = document.createElement("div");
     info.className = "video-info";
     const title = document.createElement("h3");
-    title.textContent = video.title || "Video";
-    const cat = document.createElement("p");
-    cat.textContent = video.category || "Koleksi";
-    info.append(title,cat);
-    card.append(thumb,info);
-    card.addEventListener("click",()=>{
-      if(window.VIDHUB_DIRECTLINK) window.open(window.VIDHUB_DIRECTLINK, "_blank", "noopener");
-      location.href="video.html?id="+encodeURIComponent(video.id);
+    title.textContent = video.title || "Video VIDHUB";
+    const category = document.createElement("p");
+    category.textContent = video.category || "Koleksi";
+    info.append(title, category);
+    card.append(thumb, info);
+
+    card.addEventListener("click", () => {
+      // Directlink hanya dipicu oleh klik langsung pengunjung.
+      // Video tetap dibuka di halaman pemutar dan tidak autoplay.
+      if (window.VIDHUB_DIRECTLINK) {
+        const adWindow = window.open(window.VIDHUB_DIRECTLINK, "_blank");
+        if (adWindow) adWindow.opener = null;
+      }
+      window.location.href = "./video.html?id=" + encodeURIComponent(video.id);
     });
     grid.appendChild(card);
   });
 
-  pager.replaceChildren();
-  for(let i=1;i<=total;i++){
-    const button=document.createElement("button");
-    button.textContent=i;
-    if(i===page) button.className="active";
-    button.addEventListener("click",()=>{
-      page=i;renderVideos();
-      document.getElementById("videos").scrollIntoView({behavior:"smooth"});
+  pagination.replaceChildren();
+  for (let number = 1; number <= totalPages; number++) {
+    const button = document.createElement("button");
+    button.textContent = number;
+    if (number === currentPage) button.className = "active";
+    button.setAttribute("aria-label", "Halaman " + number);
+    button.addEventListener("click", () => {
+      currentPage = number;
+      renderVideos();
+      document.getElementById("koleksi").scrollIntoView({ behavior: "smooth" });
     });
-    pager.appendChild(button);
+    pagination.appendChild(button);
   }
 }
 
-document.getElementById("searchInput").addEventListener("input",e=>{
-  query=e.target.value.trim().toLowerCase();page=1;renderVideos();
+document.getElementById("searchInput").addEventListener("input", event => {
+  searchTerm = event.target.value.trim().toLowerCase();
+  currentPage = 1;
+  renderVideos();
 });
 
-document.querySelectorAll("#categories button").forEach(button=>{
-  button.addEventListener("click",()=>{
-    document.querySelectorAll("#categories button").forEach(b=>b.classList.remove("active"));
+document.querySelectorAll("#categories [data-category]").forEach(button => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll("#categories [data-category]").forEach(item => item.classList.remove("active"));
     button.classList.add("active");
-    category=button.dataset.category;page=1;renderVideos();
+    currentCategory = button.dataset.category;
+    currentPage = 1;
+    renderVideos();
   });
 });
 

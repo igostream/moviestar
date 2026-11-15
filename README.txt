@@ -1,27 +1,36 @@
-VIDHUB - GitHub Pages
-====================
+VIDHUB — paket GitHub Pages
+===========================
 
-File:
-- index.html   : halaman daftar video
-- video.html   : halaman pemutar video
-- videos.json  : daftar 91 video unik dari tautan yang Anda kirim
-- style.css    : desain hitam-merah responsif
-- script.js    : pencarian, kategori, pagination, daftar video
-- player.js    : pemutar video
-- ads.js       : konfigurasi Directlink dan Popunder
+Isi paket:
+- index.html
+- video.html
+- videos.json (91 video unik)
+- style.css
+- script.js
+- player.js
+- ads.js
+- CNAME (moviestar.my.id)
 
-PENTING:
-1. Tautan video duplikat sudah disaring agar tidak tampil berulang.
-2. Judul video sementara dibuat "Video VIDHUB 01", dan seterusnya.
-3. Thumbnail dan durasi belum disediakan; kartu memakai latar desain.
-4. Link Telegram/WhatsApp masih placeholder. Ganti di index.html.
-5. Iklan disetel mengikuti data yang telah Anda berikan:
-   Directlink: https://uplcm.com/4/11962718
-   Popunder zone: 11962701
-   Script: https://al5sm.com/tag.min.js
-6. Directlink dipanggil saat pengguna klik kartu video. Browser dapat memblokir tab baru pada beberapa kondisi.
-7. Video tidak autoplay. Pengunjung harus menekan Play pada pemutar.
-8. Pastikan Anda memiliki hak untuk menayangkan video dan mematuhi kebijakan penyedia hosting/iklan.
+PENTING SEBELUM UPLOAD:
+1. Ekstrak ZIP.
+2. Upload SEMUA file langsung ke root repository GitHub Pages, bukan ke dalam subfolder.
+3. Pastikan nama file tepat seperti di atas, huruf kecil.
+4. Pada GitHub Pages, pilih branch yang benar dan folder /(root).
+5. Di index.html dan video.html, CSS dipanggil dengan ./style.css?v=3.
+6. Setelah deploy, buka https://moviestar.my.id dan refresh. Jika masih lama, hapus cache browser.
 
-Pasang:
-Upload seluruh isi folder ini ke root repository GitHub Pages (branch main, folder /root).
+IKLAN:
+- Directlink: https://uplcm.com/4/11962718
+- Popunder script: https://al5sm.com/tag.min.js
+- Popunder zone: 11962701
+Directlink dipicu saat klik kartu video. Popunder dimuat melalui ads.js.
+Iklan tidak dapat dijamin tampil pada setiap kunjungan; bergantung pada jaringan iklan, browser, dan kebijakannya.
+
+VIDEO:
+- 91 URL unik yang tersedia dari daftar pengguna.
+- Pemutar tidak autoplay.
+- Judul sementara Video VIDHUB 01 dan seterusnya.
+- Kartu menggunakan thumbnail visual bawaan jika URL thumbnail tidak tersedia.
+
+SOSIAL:
+Ganti USERNAME_TELEGRAM dan USERNAME_WHATSAPP pada index.html dengan tautan kanal milik Anda.

@@ -1,26 +1,26 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#090909">
-<title>Putar Video - VIDHUB</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090909">
+  <title>Pemutar Video — VIDHUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css?v=3">
 </head>
 <body>
-<header class="site-header"><nav class="nav"><a class="logo" href="index.html">VID<span>HUB</span></a><div class="nav-links"><a href="index.html">KEMBALI</a></div></nav></header>
-<main class="container player-page">
-  <div class="ad-slot">ADVERTISEMENT</div>
-  <h1 id="videoTitle" class="section-title">Memuat video...</h1>
-  <div class="main-player"><video id="mainVideo" controls playsinline preload="metadata"></video></div>
-  <p class="player-note">Tekan tombol play pada pemutar untuk mulai menonton. Video tidak diputar otomatis.</p>
-  <div class="ad-slot">ADVERTISEMENT</div>
-  <a class="back-link" href="index.html">← Kembali ke VIDHUB</a>
-</main>
-<footer><strong>VIDHUB</strong><br>© 2026 VIDHUB. All Rights Reserved.</footer>
-<script src="ads.js"></script>
-<script src="player.js"></script>
+  <header class="header"><div class="nav wrap"><a class="brand" href="./index.html">VID<span>HUB</span></a><a class="back-top" href="./index.html">← Kembali ke koleksi</a></div></header>
+  <main class="wrap player-wrap">
+    <div class="ad-slot"><span>ADVERTISEMENT</span></div>
+    <span class="eyebrow">NOW PLAYING</span>
+    <h1 id="videoTitle" class="player-title">Memuat video...</h1>
+    <div class="player-shell"><video id="mainVideo" controls playsinline preload="metadata"></video></div>
+    <p class="player-hint">Video tidak diputar otomatis. Tekan tombol play untuk mulai menonton.</p>
+    <div class="ad-slot"><span>ADVERTISEMENT</span></div>
+  </main>
+  <footer class="footer"><a class="brand" href="./index.html">VID<span>HUB</span></a><p>© 2026 VIDHUB. All rights reserved.</p></footer>
+  <script src="./ads.js?v=3"></script>
+  <script src="./player.js?v=3"></script>
 </body>
 </html>
