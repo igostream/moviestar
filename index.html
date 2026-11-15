@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090909">
+<meta name="description" content="VIDHUB - Koleksi video pilihan">
+<title>VIDHUB - Video Collection</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <nav class="nav">
+    <a class="logo" href="index.html">VID<span>HUB</span></a>
+    <div class="nav-links"><a href="index.html">HOME</a><a href="#videos">VIDEO</a><a href="#community">JOIN US</a></div>
+  </nav>
+</header>
+<main class="container">
+  <section class="hero">
+    <h1>WELCOME TO <span>VIDHUB</span></h1>
+    <p>Koleksi video pilihan. Temukan video favoritmu di sini.</p>
+    <input id="searchInput" type="search" placeholder="Cari video..." aria-label="Cari video">
+  </section>
+  <div class="ad-slot" id="topAd">ADVERTISEMENT</div>
+  <h2 class="section-title">KATEGORI VIDEO</h2>
+  <div class="categories" id="categories">
+    <button class="active" data-category="Semua">SEMUA</button>
+    <button data-category="Terbaru">TERBARU</button>
+    <button data-category="Trending">TRENDING</button>
+    <button data-category="Koleksi">KOLEKSI</button>
+  </div>
+  <h2 class="section-title" id="videos">VIDEO TERBARU</h2>
+  <div class="video-grid" id="videoGrid"><p class="empty">Memuat video...</p></div>
+  <div class="pagination" id="pagination"></div>
+  <div class="ad-slot" id="bottomAd">ADVERTISEMENT</div>
+  <section id="community">
+    <h2 class="section-title">IKUTI CHANNEL KAMI</h2>
+    <div class="social-links">
+      <a class="telegram" href="https://t.me/USERNAME_TELEGRAM" target="_blank" rel="noopener">TELEGRAM</a>
+      <a class="whatsapp" href="https://whatsapp.com/channel/USERNAME_WHATSAPP" target="_blank" rel="noopener">WHATSAPP</a>
+    </div>
+  </section>
+</main>
+<footer><strong>VIDHUB</strong><br>© 2026 VIDHUB. All Rights Reserved.</footer>
+<script src="ads.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
