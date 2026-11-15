@@ -11,6 +11,7 @@ async function initPlayer() {
     if (!video) throw new Error("Video tidak ditemukan");
 
     title.textContent = video.title || "Video VIDHUB";
+    player.autoplay = false;
     player.src = video.url;
     player.load(); // Tidak memanggil play(): autoplay tetap nonaktif.
     document.title = (video.title || "Video") + " — VIDHUB";

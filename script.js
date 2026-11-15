@@ -52,6 +52,8 @@ function renderVideos() {
     const thumb = document.createElement("div");
     thumb.className = "thumb";
 
+    // Tampilkan cuplikan frame asli dari file video sebagai thumbnail.
+    // Video hanya dimuat untuk preview; tidak diputar otomatis dengan suara.
     if (video.thumbnail) {
       const img = document.createElement("img");
       img.src = video.thumbnail;
@@ -59,6 +61,23 @@ function renderVideos() {
       img.loading = "lazy";
       img.onerror = () => img.remove();
       thumb.appendChild(img);
+    } else if (video.url) {
+      const preview = document.createElement("video");
+      preview.className = "thumb-video";
+      preview.src = video.url;
+      preview.muted = true;
+      preview.playsInline = true;
+      preview.preload = "metadata";
+      preview.setAttribute("aria-hidden", "true");
+      preview.addEventListener("loadedmetadata", () => {
+        try { preview.currentTime = Math.min(0.15, preview.duration || 0.15); }
+        catch (_) {}
+      }, { once: true });
+      preview.addEventListener("error", () => {
+        preview.remove();
+        thumb.classList.add("thumb-fallback");
+      }, { once: true });
+      thumb.appendChild(preview);
     }
 
     const mark = document.createElement("span");
@@ -79,12 +98,13 @@ function renderVideos() {
     card.append(thumb, info);
 
     card.addEventListener("click", () => {
-      // Directlink hanya dipicu oleh klik langsung pengunjung.
-      // Video tetap dibuka di halaman pemutar dan tidak autoplay.
+      // Directlink hanya terbuka karena pengunjung mengeklik kartu video.
       if (window.VIDHUB_DIRECTLINK) {
         const adWindow = window.open(window.VIDHUB_DIRECTLINK, "_blank");
         if (adWindow) adWindow.opener = null;
       }
+
+      // Tab VIDHUB menuju halaman pemutar; popunder dimuat di video.html.
       window.location.href = "./video.html?id=" + encodeURIComponent(video.id);
     });
     grid.appendChild(card);

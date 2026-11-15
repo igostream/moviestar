@@ -34,3 +34,22 @@ VIDEO:
 
 SOSIAL:
 Ganti USERNAME_TELEGRAM dan USERNAME_WHATSAPP pada index.html dengan tautan kanal milik Anda.
+
+
+UPDATE THUMBNAIL:
+- Kartu video kini mencoba menampilkan frame asli dari file video sebagai gambar preview.
+- Video preview dimute, tidak autoplay sebagai tontonan, dan tidak mengeluarkan suara.
+- Beberapa server/CDN atau format video mungkin tidak mengizinkan browser mengambil frame preview; pada kasus itu kartu memakai latar cadangan.
+
+
+PENGATURAN IKLAN FINAL:
+1. Klik kotak/kartu video di halaman koleksi.
+2. Directlink https://uplcm.com/4/11962718 dibuka pada tab baru.
+3. Tab VIDHUB berpindah ke video.html untuk video yang dipilih.
+4. Popunder zone 11962701 dimuat hanya di halaman video.html dari
+   https://al5sm.com/tag.min.js
+5. Popunder tidak dimuat di halaman beranda/koleksi.
+6. Video tidak autoplay; pengunjung menekan tombol play sendiri.
+
+Catatan: browser dapat memblokir tab iklan/pop-up. Ketersediaan tayangan iklan
+tetap bergantung pada jaringan iklan dan pengaturan browser.

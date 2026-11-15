@@ -1,20 +1,20 @@
 /*
-  PENGATURAN IKLAN VIDHUB
-  Directlink: terbuka hanya setelah pengunjung mengeklik kartu video.
-  Popunder: script jaringan iklan dimuat satu kali per halaman.
+  VIDHUB — PENGATURAN IKLAN
+  Alur:
+  1. Klik kartu video -> directlink dibuka pada tab baru.
+  2. Halaman pemutar video -> popunder dimuat di halaman ini saja.
 */
 window.VIDHUB_DIRECTLINK = "https://uplcm.com/4/11962718";
 
-(function loadPopunder() {
-  const scriptUrl = "https://al5sm.com/tag.min.js";
-  const zoneId = "11962701";
-  if (!scriptUrl || !zoneId) return;
+(function loadPopunderOnPlayerPage() {
+  const isPlayerPage = /(?:^|\/)video\.html$/i.test(window.location.pathname);
+  if (!isPlayerPage) return;
   if (document.querySelector('script[data-vidhub-popunder="1"]')) return;
 
   const script = document.createElement("script");
-  script.src = scriptUrl;
+  script.src = "https://al5sm.com/tag.min.js";
   script.async = true;
-  script.dataset.zone = zoneId;
+  script.dataset.zone = "11962701";
   script.dataset.vidhubPopunder = "1";
   (document.body || document.head).appendChild(script);
 })();
