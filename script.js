@@ -10,12 +10,12 @@ const resultCount = document.getElementById("resultCount");
 
 async function loadVideos() {
   try {
-    const response = await fetch("./videos.json?v=3", { cache: "no-store" });
+    const response = await fetch("https://shiny-resonance-3716.dikinourmanwahyudi03.workers.dev/api/videos", { cache: "no-store" });
     if (!response.ok) throw new Error("HTTP " + response.status);
     allVideos = await response.json();
     renderVideos();
   } catch (error) {
-    grid.innerHTML = '<p class="empty">Daftar video belum dapat dimuat. Pastikan videos.json berada satu folder dengan index.html.</p>';
+    grid.innerHTML = '<p class="empty">Daftar video belum dapat dimuat. Coba muat ulang halaman.</p>';
     resultCount.textContent = "Gagal memuat";
     console.error("VIDHUB:", error);
   }
