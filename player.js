@@ -4,7 +4,7 @@ async function initPlayer() {
   const id = new URLSearchParams(window.location.search).get("id");
 
   try {
-    const response = await fetch("./videos.json?v=3", { cache: "no-store" });
+    const response = await fetch("https://shiny-resonance-3716.dikinourmanwahyudi03.workers.dev/api/videos", { cache: "no-store" });
     if (!response.ok) throw new Error("Daftar video tidak tersedia");
     const videos = await response.json();
     const video = videos.find(item => String(item.id) === String(id));
