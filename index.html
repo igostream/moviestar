@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="id">
 <head>
@@ -5,78 +6,241 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#090909">
   <meta name="description" content="VIDHUB - Temukan koleksi video pilihan terbaru.">
+
   <title>VIDHUB — Koleksi Video</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="./style.css?v=5">
 </head>
+
 <body>
+
+  <!-- HEADER -->
   <header class="header">
     <div class="nav wrap">
-      <a class="brand" href="./index.html" aria-label="VIDHUB Home">VID<span>HUB</span></a>
+
+      <a class="brand" href="./index.html" aria-label="VIDHUB Home">
+        VID<span>HUB</span>
+      </a>
+
       <nav class="nav-menu">
         <a class="nav-active" href="./index.html">Beranda</a>
         <a href="#koleksi">Koleksi</a>
         <a href="#komunitas">Komunitas</a>
       </nav>
-      <a class="nav-join" href="#komunitas">Gabung <span>↗</span></a>
+
+      <a class="nav-join" href="#komunitas">
+        Gabung <span>↗</span>
+      </a>
+
     </div>
   </header>
 
+  <!-- MAIN -->
   <main class="wrap">
+
+    <!-- HERO -->
     <section class="hero">
+
       <div class="hero-copy">
-        <span class="eyebrow"><i></i> VIDEO COLLECTION</span>
-        <h1>Temukan tontonan<br><span>favoritmu.</span></h1>
-        <p>Kumpulan video pilihan dalam satu tempat. Cari, pilih kategori, lalu nikmati.</p>
+
+        <span class="eyebrow">
+          <i></i> VIDEO COLLECTION
+        </span>
+
+        <h1>
+          Temukan tontonan<br>
+          <span>favoritmu.</span>
+        </h1>
+
+        <p>
+          Kumpulan video pilihan dalam satu tempat.
+          Cari, pilih kategori, lalu nikmati.
+        </p>
+
         <label class="search-box">
           <span class="search-icon">⌕</span>
-          <input id="searchInput" type="search" placeholder="Cari judul video..." autocomplete="off">
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="Cari judul video..."
+            autocomplete="off">
           <kbd>SEARCH</kbd>
         </label>
+
       </div>
+
       <div class="hero-art" aria-hidden="true">
-        <div class="art-glow"></div><div class="art-card art-card-back"></div>
-        <div class="art-card art-card-front"><span class="art-play">▶</span><b>VIDHUB</b><small>WATCH YOUR PICKS</small></div>
-        <span class="art-tag">YOUR VIDEO SPACE</span>
-      </div>
-    </section>
 
-    <div class="ad-slot" aria-label="Area iklan"><span>ADVERTISEMENT</span></div>
+        <div class="art-glow"></div>
+        <div class="art-card art-card-back"></div>
 
-    <section id="koleksi" class="library">
-      <div class="section-head">
-        <div><span class="eyebrow">EXPLORE</span><h2>Koleksi video</h2></div>
-        <span id="resultCount" class="result-count">Memuat video...</span>
-      </div>
-      <div class="toolbar">
-        <div class="filters" id="categories">
-          <button class="filter active" data-category="Semua">Semua</button>
-          <button class="filter" data-category="Terbaru">Terbaru</button>
-          <button class="filter" data-category="Trending">Trending</button>
-          <button class="filter" data-category="Koleksi">Koleksi</button>
+        <div class="art-card art-card-front">
+          <span class="art-play">▶</span>
+          <b>VIDHUB</b>
+          <small>WATCH YOUR PICKS</small>
         </div>
+
+        <span class="art-tag">YOUR VIDEO SPACE</span>
+
+      </div>
+
+    </section>
+
+    <!-- ADVERTISEMENT TOP -->
+    <div class="ad-slot" aria-label="Area iklan">
+      <span>ADVERTISEMENT</span>
+    </div>
+
+    <!-- VIDEO COLLECTION -->
+    <section id="koleksi" class="library">
+
+      <div class="section-head">
+
+        <div>
+          <span class="eyebrow">EXPLORE</span>
+          <h2>Koleksi video</h2>
+        </div>
+
+        <span id="resultCount" class="result-count">
+          Memuat video...
+        </span>
+
+      </div>
+
+      <div class="toolbar">
+
+        <div class="filters" id="categories">
+
+          <button class="filter active" data-category="Semua">
+            Semua
+          </button>
+
+          <button class="filter" data-category="Terbaru">
+            Terbaru
+          </button>
+
+          <button class="filter" data-category="Trending">
+            Trending
+          </button>
+
+          <button class="filter" data-category="Koleksi">
+            Koleksi
+          </button>
+
+        </div>
+
         <span class="sort-label">PILIHAN EDITOR</span>
+
       </div>
-      <div id="videoGrid" class="video-grid"><div class="loading">Menyiapkan koleksi video...</div></div>
+
+      <div id="videoGrid" class="video-grid">
+        <div class="loading">
+          Menyiapkan koleksi video...
+        </div>
+      </div>
+
       <div id="pagination" class="pagination"></div>
+
     </section>
 
-    <div class="ad-slot ad-slot-bottom" aria-label="Area iklan"><span>ADVERTISEMENT</span></div>
+    <!-- ADVERTISEMENT BOTTOM -->
+    <div class="ad-slot ad-slot-bottom" aria-label="Area iklan">
+      <span>ADVERTISEMENT</span>
+    </div>
 
+    <!-- COMMUNITY -->
     <section id="komunitas" class="community">
-      <div><span class="eyebrow">STAY CONNECTED</span><h2>Jangan ketinggalan<br>update terbaru.</h2></div>
-      <div class="community-actions">
-        <!-- Ganti USERNAME_TELEGRAM dan USERNAME_WHATSAPP dengan tautan milik Anda -->
-        <a class="social-btn telegram" href="https://t.me/USERNAME_TELEGRAM" target="_blank" rel="noopener">Telegram <span>↗</span></a>
-        <a class="social-btn whatsapp" href="https://whatsapp.com/channel/USERNAME_WHATSAPP" target="_blank" rel="noopener">WhatsApp <span>↗</span></a>
+
+      <div>
+        <span class="eyebrow">STAY CONNECTED</span>
+        <h2>
+          Jangan ketinggalan<br>
+          update terbaru.
+        </h2>
       </div>
+
+      <div class="community-actions">
+
+        <a
+          class="social-btn telegram"
+          href="https://t.me/USERNAME_TELEGRAM"
+          target="_blank"
+          rel="noopener">
+          Telegram <span>↗</span>
+        </a>
+
+        <a
+          class="social-btn whatsapp"
+          href="https://whatsapp.com/channel/USERNAME_WHATSAPP"
+          target="_blank"
+          rel="noopener">
+          WhatsApp <span>↗</span>
+        </a>
+
+      </div>
+
     </section>
+
   </main>
 
-  <footer class="footer"><a class="brand" href="./index.html">VID<span>HUB</span></a><p>© 2026 VIDHUB. All rights reserved.</p></footer>
+  <!-- FOOTER -->
+  <footer class="footer">
+
+    <a class="brand" href="./index.html">
+      VID<span>HUB</span>
+    </a>
+
+    <p>© 2026 VIDHUB. All rights reserved.</p>
+
+  </footer>
+
+  <!-- ADS SCRIPT -->
   <script src="./ads.js?v=5"></script>
+
+  <!-- WEBSITE SCRIPT -->
   <script src="./script.js?v=5"></script>
+
+  <!-- HISTATS COUNTER -->
+  <div id="histats_counter"></div>
+
+  <script type="text/javascript">
+  var _Hasync = _Hasync || [];
+
+  _Hasync.push([
+    'Histats.start',
+    '1,5055845,4,511,95,18,00000000'
+  ]);
+
+  _Hasync.push(['Histats.fasi', '1']);
+  _Hasync.push(['Histats.track_hits', '']);
+
+  (function() {
+    var hs = document.createElement('script');
+    hs.type = 'text/javascript';
+    hs.async = true;
+    hs.src = '//s10.histats.com/js15_as.js';
+
+    (document.getElementsByTagName('head')[0] ||
+     document.getElementsByTagName('body')[0])
+     .appendChild(hs);
+  })();
+  </script>
+
+  <noscript>
+    <a href="/" target="_blank">
+      <img
+        src="//sstatic1.histats.com/0.gif?5055845&101"
+        alt="unique visitors counter"
+        border="0">
+    </a>
+  </noscript>
+
+  <!-- END HISTATS -->
+
 </body>
 </html>
